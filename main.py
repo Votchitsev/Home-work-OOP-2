@@ -17,7 +17,7 @@ class Student:
         else:
             return 'Ошибка'
 
-    def av_grades(self):
+    def _av_grades(self):
         if self.grades == {}:
             return 'Не оценивается'
         else:
@@ -31,10 +31,10 @@ class Student:
             print('Ошибка')
             return
         else:
-            return self.av_grades() < other.av_grades()
+            return self._av_grades() < other._av_grades()
 
     def __str__(self):
-        return f'Имя: {self.name}\nФамилия: {self.surname}\nСредняя оценка за домашнее задание: {self.av_grades()}\n' \
+        return f'Имя: {self.name}\nФамилия: {self.surname}\nСредняя оценка за домашнее задание: {self._av_grades()}\n' \
                f'Курсы в процессе обучения: {", ".join(self.courses_in_progress)}\n' \
                f'Завершенные курсы: {", ".join(self.finished_courses)}'
 
@@ -51,7 +51,7 @@ class Lecturer(Mentor):
         super().__init__(name, surname)
         self.grades = {}
 
-    def av_grades(self):
+    def _av_grades(self):
         if self.grades == {}:
             return 'Не оценивается'
         else:
@@ -65,10 +65,10 @@ class Lecturer(Mentor):
             print('Ошибка')
             return
         else:
-            return self.av_grades() < other.av_grades()
+            return self._av_grades() < other._av_grades()
 
     def __str__(self):
-        return f'Имя: {self.name}\nФамилия: {self.surname}\nСредняя оценка за лекции: {self.av_grades()} '
+        return f'Имя: {self.name}\nФамилия: {self.surname}\nСредняя оценка за лекции: {self._av_grades()} '
 
 
 class Reviewer(Mentor):
@@ -100,6 +100,7 @@ student_1.courses_in_progress += ['Python']
 student_2.finished_courses += ['Java Script']
 student_1.courses_in_progress += ['PHP']
 student_2.courses_in_progress += ['C++']
+student_1.finished_courses += ['Java Script']
 
 student_1.rate_lecturer(lecturer_1, 'Python', 7)
 student_2.rate_lecturer(lecturer_2, 'C++', 5)
@@ -111,6 +112,7 @@ reviewer_2.courses_attached += ['PHP', 'C++']
 reviewer_2.rate_hw(student_1, 'PHP', 9)
 reviewer_2.rate_hw(student_1, 'PHP', 7)
 reviewer_2.rate_hw(student_2, 'C++', 9)
+reviewer_1.rate_hw(student_1, 'Python', 10)
 
 
 def av_grade_of_homework(ls, name):
@@ -142,3 +144,5 @@ print(av_grade_lecturers(list_of_lecturers, name_of_course))
 
 print(student_1 < student_2)
 print(lecturer_1 > lecturer_1)
+
+print(student_1)
